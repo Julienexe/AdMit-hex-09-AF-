@@ -26,16 +26,14 @@ class Applicant(models.Model):
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
-    previous_school = models.ForeignKey(School,on_delete=models.CASCADE,related_name="previous school")
+    previous_school = models.ForeignKey(School,on_delete=models.CASCADE)
     date_joined_previous_school = models.DateField()
     exam_results = models.FileField(null=True, blank=True, upload_to=f"media/results/{id}", validators=[FileExtensionValidator(["pdf"])])
     testimonial = models.TextField()
-
-class Application_Form(models.Model):
-    applicant = models.OneToOneField(Applicant,on_delete=models.CASCADE)
-    next_class = models.CharField(max_length=50)
+    next_class = models.CharField(max_length=50,null=True,blank=True)
     field_of_study = models.CharField(max_length=100, null=True,blank=True)
-    Combination = models.CharField(max_length=100)
+    Combination = models.CharField(max_length=100, null=True,blank=True)
+    
 
 class Application(models.Model):
     class Status(models.TextChoices):
@@ -46,7 +44,7 @@ class Application(models.Model):
     date_created = models.DateTimeField(auto_now_add = True)
     status = models.CharField(max_length=20,choices=Status.choices)
     school = models.ForeignKey(School,on_delete=models.CASCADE)
-    application_form = models.ForeignKey(Application_Form,on_delete=models.CASCADE)
+    
 
 class Payment(models.Model):
     class Status(models.TextChoices):
