@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import School, Applicant, Application, Payment
+from .models import School, Applicant, Application, Payment, Testimonial
 
 class SchoolSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,3 +20,8 @@ class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = '__all__'
+
+class TestimonialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testimonial
+        fields = ['file']
