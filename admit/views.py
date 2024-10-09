@@ -30,3 +30,60 @@ def submit_application(request):
         serialized_application.save()
         return Response(serialized_application.data)
     return Response(serialized_application.errors)
+
+#create a view for the applicants to submit their payments
+@api_view(['POST'])
+def submit_payment(request):
+    serialized_payment = PaymentSerializer(data=request.data)
+    if serialized_payment.is_valid():
+        serialized_payment.save()
+        return Response(serialized_payment.data)
+    return Response(serialized_payment.errors)
+
+#view for someone to view a specific application
+@api_view(['GET'])
+def view_application(request,application_id):
+    application = Application.objects.get(id=application_id)
+    serialized_application = ApplicationSerializer(application)
+    return Response(serialized_application.data)
+
+#view for someone to view a specific payment
+@api_view(['GET'])
+def view_payment(request,payment_id):
+    payment = Payment.objects.get(id=payment_id)
+    serialized_payment = PaymentSerializer(payment)
+    return Response(serialized_payment.data)
+
+#view for someone to view a specific school
+@api_view(['GET'])
+def view_school(request,school_id):
+    school = School.objects.get(id=school_id)
+    serialized_school = SchoolSerializer(school)
+    return Response(serialized_school.data)
+
+#view for someone to view a specific applicant
+@api_view(['GET'])
+def view_applicant(request,applicant_id):
+    applicant = Applicant.objects.get(id=applicant_id)
+    serialized_applicant = ApplicantSerializer(applicant)
+    return Response(serialized_applicant.data)
+
+#view to edit a specific application
+@api_view(['PUT'])
+def edit_application(request,application_id):
+    application = Application.objects.get(id=application_id)
+    serialized_application = ApplicationSerializer(instance=application, data=request.data)
+    if serialized_application.is_valid():
+        serialized_application.save()
+        return Response(serialized_application.data)
+    return Response(serialized_application.errors)
+
+#view to edit applicant information
+@api_view(['PUT'])
+def edit_applicant(request,applicant_id):
+    applicant = Applicant.objects.get(id=applicant_id)
+    serialized_applicant = ApplicantSerializer(instance=applicant, data=request.data)
+    if serialized_applicant.is_valid():
+        serialized_applicant.save()
+        return Response(serialized_applicant.data)
+    return Response(serialized_applicant.errors)
