@@ -29,7 +29,6 @@ class Applicant(models.Model):
     previous_school = models.ForeignKey(School,on_delete=models.CASCADE)
     date_joined_previous_school = models.DateField()
     exam_results = models.FileField(null=True, blank=True, upload_to=f"media/results/{id}", validators=[FileExtensionValidator(["pdf"])])
-    testimonial = models.TextField()
     next_class = models.CharField(max_length=50,null=True,blank=True)
     field_of_study = models.CharField(max_length=100, null=True,blank=True)
     Combination = models.CharField(max_length=100, null=True,blank=True)
@@ -54,3 +53,8 @@ class Payment(models.Model):
     date=models.DateTimeField(auto_now_add = True)
     ammount = models.IntegerField()
     status = models.CharField(max_length=10,choices=Status.choices)
+
+class Testimonial(models.Model):
+    #applicant = models.ForeignKey(Applicant,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
+    file = models.FileField(null=True, blank=True, upload_to="testimonials/" , validators=[FileExtensionValidator(["pdf","docx","doc","jpg","png"])])
