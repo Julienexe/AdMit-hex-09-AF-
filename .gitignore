@@ -1,2 +1,6 @@
 db.sqlite3
-migrations/
+admit/migrations/*
+!admit/migrations/__init__.py
+
+schools/migrations/*
+!schools/migrations/__init__.py
