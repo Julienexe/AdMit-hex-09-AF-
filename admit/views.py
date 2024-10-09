@@ -1,8 +1,10 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.parsers import MultiPartParser, FormParser
+
 from .models import School, Applicant, Application, Payment
-from .serializers import SchoolSerializer, ApplicantSerializer, ApplicationSerializer, PaymentSerializer
+from .serializers import SchoolSerializer, ApplicantSerializer, ApplicationSerializer, PaymentSerializer,TestimonialSerializer
 
 @api_view(['GET'])
 def home(request):
@@ -21,6 +23,15 @@ def create_school(request):
         serialized_school.save()
         return Response(serialized_school.data)
     return Response(serialized_school.errors)
+
+#create applicant
+@api_view(['POST'])
+def create_applicant(request):
+    serialized_applicant = ApplicantSerializer(data=request.data)
+    if serialized_applicant.is_valid():
+        serialized_applicant.save()
+        return Response(serialized_applicant.data)
+    return Response(serialized_applicant.errors)
 
 #create a view for the applicants to submit their applications
 @api_view(['POST'])
@@ -87,3 +98,16 @@ def edit_applicant(request,applicant_id):
         serialized_applicant.save()
         return Response(serialized_applicant.data)
     return Response(serialized_applicant.errors)
+
+#viewset to handle testimonial uploads
+class TestimonialViewSet(ModelViewSet):
+    queryset = Applicant.objects.all()
+    serializer_class = TestimonialSerializer
+
+    parser_classes = (MultiPartParser, FormParser,)
+
+    def perform_create(self, serializer):
+        #applicant = Applicant.objects.get(id=self.request.user.id)
+        serializer.save(
+                       file=self.request.data.get('file'))
+        return Response({"message":"Testimonial uploaded successfully"})
