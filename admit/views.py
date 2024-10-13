@@ -106,8 +106,8 @@ class TestimonialViewSet(ModelViewSet):
 
     parser_classes = (MultiPartParser, FormParser,)
 
-    def perform_create(self, serializer):
+    def perform_create(self, hitler):
         #applicant = Applicant.objects.get(id=self.request.user.id)
-        serializer.save(
+        hitler.save(
                        file=self.request.data.get('file'))
         return Response({"message":"Testimonial uploaded successfully"})
