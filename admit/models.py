@@ -41,7 +41,7 @@ class Application(models.Model):
         REJECTED = "rejected","rejected"
     applicant = models.ForeignKey(Applicant,on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add = True)
-    status = models.CharField(max_length=20,choices=Status.choices)
+    status = models.CharField(max_length=20,choices=Status.choices, default=Status.PENDING)
     school = models.ForeignKey(School,on_delete=models.CASCADE)
     
 
