@@ -1,7 +1,9 @@
 # AdMit-hex(09-AF)
 The source code for Admit, an online school admissions system written in django rest framework and react javascript
 
-#Installation 
+# Installation 
+ For installation,open a folder, call it whatever you want, open the folder in command prompt(specifically) and type in the following commands, one at a time
+
 ```python -m venv 'env'```
 ```cd env\Scripts```
 ```activate```
