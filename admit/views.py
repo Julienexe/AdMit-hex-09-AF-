@@ -23,7 +23,9 @@ def home(request):
             "GET /view_applicant/<int:applicant_id>/": "View a specific applicant",
             "PUT /edit_application/<int:application_id>": "Edit a specific application",
             "PUT /edit_applicant/<int:applicant_id>": "Edit a specific applicant",
-            "POST /upload_testimonial/": "Upload a testimonial",}
+            "POST /upload_testimonial/": "Upload a testimonial",
+            "GET /applications/": "View all applications",
+            }
 
         
         })
