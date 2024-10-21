@@ -8,7 +8,25 @@ from .serializers import SchoolSerializer, ApplicantSerializer, ApplicationSeria
 
 @api_view(['GET'])
 def home(request):
-    return Response({"message":"Welcome to the admit API"})
+    #documentation
+    return Response({
+        "message":"Welcome to the admit API",
+        "endpoints": {
+            "GET /schools/": "Get all schools",
+            "POST /create_school/": "Create a school",
+            "POST /create_applicant/": "Create an applicant",
+            "POST /submit_application/": "Submit an application",
+            "POST /submit_payment/": "Submit a payment",
+            "GET /view_application/<int:application_id>/": "View a specific application",
+            "GET /view_payment/<int:payment_id>/": "View a specific payment",
+            "GET /view_school/<int:school_id>/": "View a specific school",
+            "GET /view_applicant/<int:applicant_id>/": "View a specific applicant",
+            "PUT /edit_application/<int:application_id>": "Edit a specific application",
+            "PUT /edit_applicant/<int:applicant_id>": "Edit a specific applicant",
+            "POST /upload_testimonial/": "Upload a testimonial",}
+
+        
+        })
 
 @api_view(['GET'])
 def schools(request):
