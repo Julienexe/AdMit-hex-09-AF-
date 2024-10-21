@@ -22,5 +22,7 @@ urlpatterns = [
 
     #create applicant
     path("create_applicant/",views.create_applicant), 
+    #view applications
+    path("applications/",views.applications),
 
 ]
