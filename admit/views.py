@@ -83,6 +83,13 @@ def view_payment(request,payment_id):
     serialized_payment = PaymentSerializer(payment)
     return Response(serialized_payment.data)
 
+#view all applications
+@api_view(['GET'])
+def view_applications(request):
+    applications = Application.objects.all()
+    serialized_applications = ApplicationSerializer(applications, many=True)
+    return Response(serialized_applications.data)
+
 #view for someone to view a specific school
 @api_view(['GET'])
 def view_school(request,school_id):
