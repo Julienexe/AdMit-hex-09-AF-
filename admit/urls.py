@@ -23,6 +23,6 @@ urlpatterns = [
     #create applicant
     path("create_applicant/",views.create_applicant), 
     #view applications
-    path("applications/",views.applications),
+    path("applications/",views.view_applications),
 
 ]
