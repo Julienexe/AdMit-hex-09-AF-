@@ -4,7 +4,8 @@ from django.core.validators import FileExtensionValidator
 class School(models.Model):
     class SchoolType(models.TextChoices):
         MIXED = "mixed","mixed"
-        SINGLE = "single","single"
+        BOYS = "boys","boys"
+        GIRLS = "girls","girls"
     name = models.CharField(max_length=100)
     email = models.EmailField()
     location = models.CharField(max_length=255)
@@ -26,7 +27,7 @@ class Applicant(models.Model):
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
-    previous_school = models.ForeignKey(School,on_delete=models.CASCADE)
+    previous_school = models.ForeignKey(School,on_delete=models.CASCADE,null=True,blank=True)
     date_joined_previous_school = models.DateField()
     exam_results = models.FileField(null=True, blank=True, upload_to=f"media/results/{id}", validators=[FileExtensionValidator(["pdf"])])
     next_class = models.CharField(max_length=50,null=True,blank=True)
