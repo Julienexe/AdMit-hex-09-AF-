@@ -25,6 +25,7 @@ def home(request):
             "PUT /edit_applicant/<int:applicant_id>": "Edit a specific applicant",
             "POST /upload_testimonial/": "Upload a testimonial",
             "GET /applications/": "View all applications",
+            "GET /my-applications/<application_id>/" : "View applications personal to the logged in user"
             }
 
         
@@ -91,6 +92,20 @@ def view_applications(request):
     applications = Application.objects.all()
     serialized_applications = ApplicationSerializer(applications, many=True)
     return Response(serialized_applications.data)
+
+#view applications for logged in user
+@api_view(['GET'])
+def view_personal_applications(request,applicant_id):
+    user = request.user
+    #get count of pending applications
+    pending_applications_count = Application.objects.filter(applicant=applicant_id, status='pending').count()
+    #accepted applications
+    accepted_applications_count = Application.objects.filter(applicant=applicant_id, status='accepted').count()
+    
+    applications = Application.objects.filter(applicant=applicant_id)
+    serialized_applications = ApplicationSerializer(applications, many=True)
+    #return serialized applications and application counts
+    return Response({'applications': serialized_applications.data, 'pending_applications_count': pending_applications_count, 'accepted_applications_count': accepted_applications_count})
 
 #view for someone to view a specific school
 @api_view(['GET'])
