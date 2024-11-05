@@ -24,5 +24,7 @@ urlpatterns = [
     path("create_applicant/",views.create_applicant), 
     #view applications
     path("applications/",views.view_applications),
+    #view applications for user with counts
+    path('my-applications/<int:applicant_id>/',views.view_personal_applications)
 
 ]
