@@ -29,7 +29,7 @@ class Applicant(models.Model):
     email = models.EmailField()
     previous_school = models.ForeignKey(School,on_delete=models.CASCADE,null=True,blank=True)
     date_joined_previous_school = models.DateField()
-    exam_results = models.FileField(null=True, blank=True, upload_to=f"media/results/{id}", validators=[FileExtensionValidator(["pdf"])])
+    exam_results = models.TextField(null=True, blank=True)
     next_class = models.CharField(max_length=50,null=True,blank=True)
     field_of_study = models.CharField(max_length=100, null=True,blank=True)
     Combination = models.CharField(max_length=100, null=True,blank=True)
