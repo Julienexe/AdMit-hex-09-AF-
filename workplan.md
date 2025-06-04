@@ -115,7 +115,7 @@ This project is structured into 7 modular Django apps, each responsible for a di
 
 ## 📦 Future Improvements
 
-- Split `core` into `users` and `dashboard` if complexity increases
+- Split `admit` into `users` and `dashboard` if complexity increases
 - Add `communication` app for notification templates and logs
 - Add `audit` or `logs` app to track admin actions and system changes
 
