@@ -1,30 +1,31 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
+# Create a router and register our viewset with it.
+router = DefaultRouter()
+router.register(r'testimonials', views.TestimonialViewSet, basename='testimonial')
+router.register(r'payments', views.PaymentViewSet, basename='payment')
+router.register(r'applicants', views.ApplicantsViewSet, basename='applicant')
+router.register(r'applications', views.ApplicationsViewSet, basename='application')
+router.register(r'schools', views.SchoolsViewSet, basename='school')
+router.register(r'users', views.UserViewSet, basename='user')
+
 urlpatterns = [ 
-    path("",views.home),
-    path("schools/",views.schools),
-    path("create_school/",views.create_school),
+    path('', include(router.urls)),
 
-    path("submit_application/",views.submit_application),
-    path("submit_payment/",views.submit_payment),
-
-    path("view_application/<int:application_id>/",views.view_application),
-    path("view_payment/<int:payment_id>/",views.view_payment),
-    path("view_school/<int:school_id>/",views.view_school),
-    path("view_applicant/<int:applicant_id>/",views.view_applicant),
-    #edit application
-    path("edit_application/<int:application_id>",views.edit_application),
-    #edit applicant info
-    path("edit_applicant/<int:applicant_id>",views.edit_applicant),
-    #upload testimonial file
-    path("upload_testimonial/",views.TestimonialViewSet.as_view({"post":"create"})),  
-
-    #create applicant
-    path("create_applicant/",views.create_applicant), 
-    #view applications
-    path("applications/",views.view_applications),
-    #view applications for user with counts
-    path('my-applications/<int:applicant_id>/',views.view_personal_applications)
+    # path("view_application/<int:application_id>/",views.view_application),
+    # path("view_payment/<int:payment_id>/",views.view_payment),
+    # path("view_school/<int:school_id>/",views.view_school),
+    # path("view_applicant/<int:applicant_id>/",views.view_applicant),
+    # #edit application
+    # path("edit_application/<int:application_id>",views.edit_application),
+    # #edit applicant info
+    # path("edit_applicant/<int:applicant_id>",views.edit_applicant),
+    # #upload testimonial file 
+    # #view applications
+    # path("applications/",views.view_applications),
+    # #view applications for user with counts
+    # path('my-applications/<int:applicant_id>/',views.view_personal_applications)
 
 ]

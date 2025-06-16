@@ -1,6 +1,7 @@
 db.sqlite3
-admit/migrations/*
-!admit/migrations/__init__.py
+# Ignore all files in any 'migrations' folder
+*/migrations/*
+# But do not ignore __init__.py in any 'migrations' folder
+!*/migrations/__init__.py
 
-schools/migrations/*
-!schools/migrations/__init__.py
+*.pyc
