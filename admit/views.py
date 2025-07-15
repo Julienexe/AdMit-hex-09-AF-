@@ -21,6 +21,7 @@ class SchoolsViewSet(ModelViewSet):
 class PaymentViewSet(ModelViewSet):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+    #only allow authenticated users to create payments, including jwt authentication
 
 
     def perform_create(self, serializer):

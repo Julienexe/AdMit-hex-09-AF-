@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     "schools",
     'users',
+    'applications',
+    'drf_yasg',
     'rest_framework_simplejwt',
 ]
 
@@ -140,5 +142,18 @@ USE_X_FORWARDED_HOST=True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ]
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT Authorization header using the Bearer scheme. Example: "Bearer {token}"',
+        }
+    },
+    'USE_SESSION_AUTH': False,  # hides the Django login in Swagger UI
 }
