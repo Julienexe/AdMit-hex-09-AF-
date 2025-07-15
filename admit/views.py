@@ -7,14 +7,6 @@ from django.contrib.auth.models import User
 from .models import School, Applicant, Application, Payment
 from .serializers import SchoolSerializer, ApplicantSerializer, ApplicationSerializer, PaymentSerializer,TestimonialSerializer, UserSerializer
 
-#user viewset for testing purposes
-class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-    def perform_create(self, serializer):
-        serializer.save()
-        return Response({"message": "User created successfully"})
 
 class SchoolsViewSet(ModelViewSet):
     queryset = School.objects.all()
